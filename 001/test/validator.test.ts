@@ -13,13 +13,14 @@ test.each([
     "302.170-27",
     "222.053.160-00",
     "55.971.314-01",
-    "406.302.170-27"
+    "406.302.170-27",
+    "404446.304442.1704-2447",
+    null,
+    undefined])("Deve testar um CPF invalido", function (cpf) {
+        const isValid = validate(cpf);
+        expect(isValid).toBeFalsy();
 
-])("Deve testar um CPF invalido", function (cpf) {
-    const isValid = validate(cpf);
-    expect(isValid).toBeFalsy();
-
-});
+    });
 
 test("Deve testar um CPF invalido com todos os digitos iguais", function () {
     const isValid = validate("111.111.111-11");
