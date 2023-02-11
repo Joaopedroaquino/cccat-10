@@ -22,10 +22,11 @@ test.each([
 
     });
 
-test.each(["111.111.111-11",
-"222.222.222-22",
-"333.333.333-33"])("Deve testar um CPF invalido com todos os digitos iguais", function () {
-    const isValid = validate("111.111.111-11");
-    expect(isValid).toBeFalsy();
+test.each([
+    "111.111.111-11",
+    "222.222.222-22",
+    "333.333.333-33"])("Deve testar um CPF invalido com todos os digitos iguais", function (cpf) {
+        const isValid = validate(cpf);
+        expect(isValid).toBeFalsy();
 
-});
+    });
