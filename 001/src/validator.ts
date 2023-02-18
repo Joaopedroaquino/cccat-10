@@ -17,16 +17,20 @@ function isValidLenght(cpf) {
     return cpf.length !== 11;
 }
 
+function allDigitsTheSame(cpf){
+   return cpf.split("").every(c => c === cpf[0]);
+}
+
 export function validate(cpf) {
     if (!cpf) return false;
     cpf = clean(cpf)
     if (isValidLenght(cpf)) return false;
-    if (cpf.split("").every(c => c === cpf[0])) return false;
-    const dg1 = calculateDigit(cpf, 10);
-    const dg2 = calculateDigit(cpf, 11);
-    let nDigVerific = cpf.substring(cpf.length - 2, cpf.length);
-    const nDigResult = "" + dg1 + "" + dg2;
-    return nDigVerific == nDigResult;
+    if (allDigitsTheSame(cpf)) return false;
+    const digit1 = calculateDigit(cpf, 10);
+    const digit2 = calculateDigit(cpf, 11);
+    let actualDigit = cpf.substring(cpf.length - 2, cpf.length);
+    const calculatedDigit = `${digit1}${digit2}`;
+    return actualDigit == calculatedDigit;
 }
 
 
