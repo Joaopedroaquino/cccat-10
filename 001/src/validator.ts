@@ -3,11 +3,7 @@ export function validate(cpf) {
     if (cpf !== null) {
         if (cpf !== undefined) {
             if (cpf.length >= 11 && cpf.length <= 14) {
-                cpf = cpf
-                    .replace('.', '')
-                    .replace('.', '')
-                    .replace('-', '')
-                    .replace(" ", "");
+                cpf = cpf  .replace('.', '') .replace('.', '').replace('-', '') .replace(" ", "");
                 if (!cpf.split("").every(c => c === cpf[0])) {
                     try {
                         let d1, d2;
