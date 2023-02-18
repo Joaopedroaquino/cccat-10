@@ -17,10 +17,12 @@ function isValidLenght(cpf) {
     return cpf.length !== 11;
 }
 
-function allDigitsTheSame(cpf){
-   return cpf.split("").every(c => c === cpf[0]);
+function allDigitsTheSame(cpf) {
+    return cpf.split("").every(c => c === cpf[0]);
 }
-
+function extractCheckDigit(cpf) {
+    return cpf.substring(cpf.length - 2, cpf.length);
+}
 export function validate(cpf) {
     if (!cpf) return false;
     cpf = clean(cpf)
@@ -28,7 +30,7 @@ export function validate(cpf) {
     if (allDigitsTheSame(cpf)) return false;
     const digit1 = calculateDigit(cpf, 10);
     const digit2 = calculateDigit(cpf, 11);
-    let actualDigit = cpf.substring(cpf.length - 2, cpf.length);
+    let actualDigit = extractCheckDigit(cpf);
     const calculatedDigit = `${digit1}${digit2}`;
     return actualDigit == calculatedDigit;
 }
