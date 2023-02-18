@@ -9,9 +9,13 @@ function calculateDigit(cpf, factor) {
     return (rest < 2) ? 0 : 11 - rest
 }
 
+function clean(cpf) {
+    return cpf.replace(/\D/g, "")
+}
+
 export function validate(cpf) {
     if (!cpf) return false;
-    cpf = cpf.replace(/\D/g, "")
+    cpf = clean(cpf)
     if (cpf.length !== 11) return false;
     if (cpf.split("").every(c => c === cpf[0])) return false;
     const dg1 = calculateDigit(cpf, 10);
