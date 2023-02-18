@@ -1,11 +1,9 @@
 // @ts-nocheck
 export function validate(cpf) {
-    if (cpf === null) return false;
-    if (cpf === undefined) return false;
-    cpf = cpf.replace('.', '').replace('.', '').replace('-', '').replace(" ", "");
+    if (!cpf) return false;
+    cpf = cpf.replace(/\D/g, "")
     if (cpf.length !== 11) return false;
     if (cpf.split("").every(c => c === cpf[0])) return false;
-
     let d1, d2;
     let dg1, dg2, rest;
     let digito;
