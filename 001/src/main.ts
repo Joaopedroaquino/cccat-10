@@ -16,7 +16,12 @@ app.post("/checkout", async function (req: Request, res: Response) {
         }
 
     }
-   
+
+    if(req.body.coupon){
+        const [couponData] = await connection.query( "select * from cccat10.coupon where code = $1",[req.body.coupon]);
+       const percentage = parseFloat(couponData.percentage);
+       output.total -= (output.total * percentage)/100;
+    }
     const isValid = validate(req.body.cpf);
     await connection.$pool.end();
     if (!isValid) output.message = "Invalid cpf";
