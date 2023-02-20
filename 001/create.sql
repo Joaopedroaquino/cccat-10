@@ -1,4 +1,5 @@
-drop schema cccat10
+drop table cccat10.product;
+drop schema cccat10;
 create schema cccat10;
 create table cccat10.product(
     id_product integer,
