@@ -8,7 +8,7 @@ app.post("/checkout", async function (req: Request, res: Response) {
     const output: Output = {
         total: 0
     };
-    const connection = pgp()("postgres://postgres@localhost/mydatabase");
+    const connection = pgp()("postgres://postgres:postgres@localhost:5432/mydatabase");
     if(req.body.items){
         for (const item of req.body.items){
             const [productData] = await connection.query("select * from cccat10.product where id_product = $1", item.idProduct);
@@ -18,7 +18,7 @@ app.post("/checkout", async function (req: Request, res: Response) {
     }
 
     if(req.body.coupon){
-        const [couponData] = await connection.query( "select * from cccat10.coupon where code = $1",[req.body.coupon]);
+        const [couponData] = await connection.query( "select * from cccat10.coupon where code = $1", [req.body.coupon]);
        const percentage = parseFloat(couponData.percentage);
        output.total -= (output.total * percentage)/100;
     }
