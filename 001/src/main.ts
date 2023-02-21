@@ -8,7 +8,7 @@ app.post("/checkout", async function (req: Request, res: Response) {
     const output: Output = {
         total: 0
     };
-    const connection = pgp()("postgres://postgres:123456@localhost:5437/app");
+    const connection = pgp()("postgres://postgres@localhost/mydatabase");
     if(req.body.items){
         for (const item of req.body.items){
             const [productData] = await connection.query("select * from cccat10.product where id_product = $1", item.idProduct);
